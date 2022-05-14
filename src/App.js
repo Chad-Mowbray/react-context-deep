@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react'
+import Intermediate1 from './components/Intermediate1';
+import UserContext from './contexts/UserContext';
+
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const handleSubmit = () => {
+    setIsLoggedIn(!isLoggedIn)
+  }
+
+  const buttonVal = "Log " + (isLoggedIn ? "out" : "in")
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>App</h1>
+      <input onClick={handleSubmit} type="button" value={buttonVal} />
+      <UserContext.Provider value={isLoggedIn}>
+        <Intermediate1 />
+      </UserContext.Provider>
     </div>
   );
 }
+
 
 export default App;
